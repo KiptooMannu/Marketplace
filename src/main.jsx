@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import Home from './Home';
 import Contact from './Contact';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Tecniq from './Tecniq';
+
 import SignInPage from './userbutton'; // Ensure this points to the correct component
 
 import { ClerkProvider } from '@clerk/clerk-react';
@@ -19,10 +19,7 @@ const router = createBrowserRouter([
     path: '/Contact',
     element: <Contact />,
   },
-  {
-    path: '/Tecniq',
-    element: <Tecniq />,
-  },
+
   {
     path: '/sign-in',
     element: <SignInPage />,

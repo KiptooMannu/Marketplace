@@ -16,10 +16,10 @@ function Header() {
            <h1>LOGO</h1>
 
            <ul className='hidden md:flex gap-16'>
-         <li className='font-medium hover:scale-105 transition-all cursor-pointer'>Home</li>
-         <li className='font-medium hover:scale-105 transition-all cursor-pointer'>New</li>
-         <li className='font-medium hover:scale-105 transition-all cursor-pointer'>Search</li>
-         <li className='font-medium hover:scale-105 transition-all cursor-pointer'>PreOwned</li>
+         <li className='font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary'>Home</li>
+         <li className='font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary'>New</li>
+         <li className='font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary'>Search</li>
+         <li className='font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary'>PreOwned</li>
      </ul>
      
  {isSignedIn?
