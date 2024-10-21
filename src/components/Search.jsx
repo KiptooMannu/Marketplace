@@ -58,6 +58,9 @@ function Search() {
               ${price.amount}
             </SelectItem>
           ))}
+
+
+          
         </SelectContent>
       </Select>
 
