@@ -14,7 +14,7 @@ function createRandomeCarList(){
 }
 
 const carList=faker.helpers.multiple(createRandomeCarList,{
-    count:100
+    count:9
 })
 
 export default{
