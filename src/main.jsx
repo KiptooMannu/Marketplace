@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client';
 import Home from './Home';
 import Contact from './Contact';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
+import Profile from './Profile/Index';
 import SignInPage from './userbutton'; // Ensure this points to the correct component
-
+import Addlisting from './addlisting/index';
 import { ClerkProvider } from '@clerk/clerk-react';
 import './index.css'; 
 
@@ -24,6 +24,16 @@ const router = createBrowserRouter([
     path: '/sign-in',
     element: <SignInPage />,
   },
+
+  {
+    path:'/Profile',
+    element:<Profile/>
+  },
+
+  {
+    path:'/addlisting',
+    element:<Addlisting/>
+  }
 
 ]);
 
