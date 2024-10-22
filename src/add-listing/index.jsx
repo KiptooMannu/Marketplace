@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Checkbox } from "@/components/ui/checkbox"
 
 import Header from '@/components/Header';
 import carDetails from './../Shared/carDetails.json';
@@ -21,11 +22,18 @@ function Addlisting() {
     }));
   };
 
+  
+
   // Log formData whenever it changes
   useEffect(() => {
     console.log('Updated formData:', formData);
   }, [formData]);
 
+
+  const onSubmit=(e)=>{
+    e.preventDefault();
+    console.log(formData);
+  }
   return (
     <div>
       <Header />
@@ -55,7 +63,8 @@ function Addlisting() {
                     handleInputChange={handleInputChange} />
 
                   ) : item.fieldType === 'textarea' ? (
-                    <TextAreaField item={item} />
+                    <TextAreaField item={item} 
+                    handleInputChange={handleInputChange}/>
                   ) : null}
                 </div>
               ))}
@@ -68,14 +77,14 @@ function Addlisting() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {features.features.map((item, index) => (
                 <div key={index} className="flex gap-2 items-center">
-                  <CheckBoxField />
+                  <Checkbox onCheckedChange={(value)=>handleInputChange(item.name,value)}/>
                   <h2>{item.label}</h2>
                 </div>
               ))}
             </div>
           </div>
           <div className="mt-10 flex justify-end">
-            <Button>Submit</Button>
+            <Button onclick={(e)=>onSubmit(e)}>Submit</Button>
           </div>
           {/* Car Images */}
         </form>
