@@ -5,7 +5,7 @@ import Contact from './Contact';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Profile from './Profile/Index';
 import SignInPage from './userbutton'; // Ensure this points to the correct component
-import Addlisting from './addlisting/index';
+import Addlisting from './add-listing/index';
 import { ClerkProvider } from '@clerk/clerk-react';
 import './index.css'; 
 
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path:'/addlisting',
+    path:'/add-listing',
     element:<Addlisting/>
   }
 
