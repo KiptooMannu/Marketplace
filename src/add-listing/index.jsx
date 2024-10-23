@@ -30,9 +30,18 @@ function Addlisting() {
   }, [formData]);
 
 
-  const onSubmit=(e)=>{
+  const onSubmit=async(e)=>{
     e.preventDefault();
     console.log(formData);
+try{
+  const result = await db.insert(CarListing).values(formData);
+  if(result){
+    console.log("Data Saved")
+  }
+}catch(e){
+  console.log("Error" , e)
+}
+   
   }
   return (
     <div>
