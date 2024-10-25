@@ -50,7 +50,11 @@ console.log(featuresData)
     console.log("Form data on submit:", formData);
 
     try {
-      const result = await db.insert(CarListing).values(formData);
+      const result = await db.insert(CarListing).values({
+        ...FormData,
+        features: featuresData,
+      });
+     
       console.log("Data Saved:", result);
       alert("Listing added successfully!");
     } catch (error) {
