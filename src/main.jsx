@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import Home from './Home';
-import Contact from './Contact';
+
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Profile from './Profile/Index';
 import SignInPage from './userbutton'; // Ensure this points to the correct component
@@ -14,10 +14,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
-  },
-  {
-    path: '/Contact',
-    element: <Contact />,
   },
 
   {
