@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { CarListing } from '@/configs_Backend/Schema';
 import db from './../configs_Backend/index.js';
 import IconField from './component/IconField';
-
+import UploadImages from './component/UploadImages';
 function Addlisting() {
   const [formData, setFormData] = useState([]);
   const [featuresData,setFeaturesData]=useState([]);
@@ -106,6 +106,9 @@ console.log(featuresData)
               ))}
             </div>
           </div>
+          <Separator className='my-6'/>
+          {/* Car Images */}
+          <UploadImages/>
           <div className="mt-10 flex justify-end">
             <Button onClick={(e) => onSubmit(e)}>Submit</Button>
           </div>
