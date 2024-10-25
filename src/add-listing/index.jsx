@@ -10,10 +10,11 @@ import features from './../Shared/Features.json';
 import { Button } from '@/components/ui/button';
 import { CarListing } from '@/configs_Backend/Schema';
 import db from './../configs_Backend/index.js';
+import IconField from './component/IconField';
 
 function Addlisting() {
   const [formData, setFormData] = useState([]);
-
+  const [featuresData,setFeaturesData]=useState([]);
   const handleInputChange = (name, value) => {
     console.log('Field:', name, 'Value:', value);
     setFormData((prevData) => ({
@@ -34,6 +35,15 @@ function Addlisting() {
   useEffect(() => {
     testConnection(); // Test database connectivity on mount
   }, []);
+
+  const handleFeatureChange=(name,value)=>{
+    setFeaturesData((prevData)=>({
+        ...prevData,
+        [name]:value
+    }))
+console.log(featuresData)
+}
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +71,9 @@ function Addlisting() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {carDetails.carDetails.map((item, index) => (
                 <div key={index}>
-                  <label className="text-sm">
+                  <label className="text-sm gap-2 mb-2 items-center flex">
+                   <IconField icon={item?.icon}/>
+                   
                     {item?.label}
                     {item.required && <span className="text-red-800">*</span>}
                   </label>
@@ -83,7 +95,8 @@ function Addlisting() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {features.features.map((item, index) => (
                 <div key={index} className="flex gap-2 items-center">
-                  <Checkbox onCheckedChange={(value) => handleInputChange(item.name, value)} />
+                  <Checkbox onCheckedChange={(value)=>handleFeatureChange(item.name,value)}
+                                    checked={featuresData?.[item.name]}/>
                   <h2>{item.label}</h2>
                 </div>
               ))}
