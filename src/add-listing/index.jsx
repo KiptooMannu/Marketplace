@@ -5,13 +5,14 @@ import carDetails from './../Shared/carDetails.json';
 import InputField from './component/InputField';
 import Dropdownfield from './component/Dropdownfield';
 import TextAreaField from './component/TextAreaField';
-import { Separator } from '@radix-ui/react-select';
+import { Content, Separator } from '@radix-ui/react-select';
 import features from './../Shared/Features.json';
 import { Button } from '@/components/ui/button';
 import { CarListing } from '@/configs_Backend/Schema';
 import db from './../configs_Backend/index.js';
 import IconField from './component/IconField';
 import UploadImages from './component/UploadImages';
+import { uploadBytes } from 'firebase/storage';
 function Addlisting() {
   const [formData, setFormData] = useState([]);
   const [featuresData,setFeaturesData]=useState([]);
@@ -62,6 +63,8 @@ console.log(featuresData)
       alert(`An error occurred: ${error.message || "Unknown error"}`);
     }
   };
+
+
 
   return (
     <div>

@@ -1,6 +1,8 @@
 import React , { useState } from 'react'
 import { IoClose } from "react-icons/io5";
-
+import {storage} from '../../configs_Backend/Firebase_config'
+import { Button } from '@/components/ui/button';
+import {  ref, uploadBytes } from 'firebase/storage';
 function UploadImages() {
     const [selectedFileList,setSelectedFileList]=useState([]);
     const onFileSelected=(event)=>{
@@ -18,6 +20,23 @@ function UploadImages() {
         const result=selectedFileList.filter((item)=>item!=image);
         setSelectedFileList(result);
     }
+
+
+    const UploadImages=()=>{
+        selectedFileList.forEach((file)=>{
+          const fileName=Date.now()+ 'jpeg';
+          const storageRef=ref(storage,'car-marketplace/'+fileName);
+        const metaData={
+          ContentType:'image/jpeg'
+        }
+        uploadBytes(storageRef,file,metaData).then((snapshot)=>{
+          console.log('File uploaded');
+          
+          })
+        })
+        }
+
+
   return (
     <div>
         <h2 className='font-medium text-xl my-3'>Upload Car Images</h2>
@@ -45,6 +64,7 @@ function UploadImages() {
            onChange={onFileSelected} 
             className='opacity-0' />
       </div>
+      <Button onClick={UploadImages}>Upload Images</Button>
     </div>
   )
 }
