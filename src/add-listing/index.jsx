@@ -12,11 +12,14 @@ import { CarListing } from '@/configs_Backend/Schema';
 import db from './../configs_Backend/index.js';
 import IconField from './component/IconField';
 import UploadImages from './component/UploadImages';
-import { uploadBytes } from 'firebase/storage';
+
+
 function Addlisting() {
   const [formData, setFormData] = useState([]);
   const [featuresData,setFeaturesData]=useState([]);
-  const handleInputChange = (name, value) => {
+  const [triggerUploadImages,setTriggerUploadImages]=useState(); 
+
+  const handleInputChange = (name, value) => { 
     console.log('Field:', name, 'Value:', value);
     setFormData((prevData) => ({
       ...prevData,
@@ -54,10 +57,14 @@ console.log(featuresData)
       const result = await db.insert(CarListing).values({
         ...formData,
         features: featuresData,
-      });
+      }).returning({id:CarListing.id});
+
+      if (result) {
+        console.log("Data Saved:", result);
+        setTriggerUploadImages(result[0]?.id);  // Correct usage here
+        alert("Listing added successfully!");
+      }
      
-      console.log("Data Saved:", result);
-      alert("Listing added successfully!");
     } catch (error) {
       console.error("Error during submission:", error.message || error); 
       alert(`An error occurred: ${error.message || "Unknown error"}`);
@@ -71,7 +78,7 @@ console.log(featuresData)
       <Header />
       <div className="px-10 md:px-20 my-10">
         <h2 className="font-bold text-3xl mb-6">Add New Listing</h2>
-        <form className="p-10 border rounded-xl">
+        <form className="p-10 border rounded-xl mt-10">
           {/* Car Details */}
           <div>
             <h2 className="font-medium text-xl mb-6">Car Details</h2>
@@ -111,12 +118,12 @@ console.log(featuresData)
           </div>
           <Separator className='my-6'/>
           {/* Car Images */}
-     
+      
           <div className="mt-10 flex justify-end">
             <Button onClick={(e) => onSubmit(e)}>Submit</Button>
           </div>
         </form>
-        <UploadImages/>
+        <UploadImages triggerUploadImages={triggerUploadImages}/>
       </div>
     </div>
   );

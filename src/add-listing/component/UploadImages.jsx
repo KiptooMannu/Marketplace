@@ -1,10 +1,24 @@
-import React , { useState } from 'react'
+
+import React, { useState, useEffect } from 'react'; // <-- Add useEffect here
 import { IoClose } from "react-icons/io5";
 import {storage} from '../../configs_Backend/Firebase_config'
-import { Button } from '@/components/ui/button';
+import CarImages from '../../configs_Backend/Schema'
+
+
 import {  getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-function UploadImages() {
+function UploadImages({triggerUploadImages}) {
     const [selectedFileList,setSelectedFileList]=useState([]);
+    
+    useEffect(()=>{
+      if(triggerUploadImages)
+
+        {
+          UploadImageToServer();
+        }
+    })
+    
+    
+    
     const onFileSelected=(event)=>{
         const files=event.target.files;
         
@@ -22,8 +36,8 @@ function UploadImages() {
     }
 
 
-    const UploadImages=()=>{
-        selectedFileList.forEach((file)=>{
+    const UploadImageToServer=async()=>{
+        await selectedFileList.forEach(async(file)=>{
           const fileName=Date.now()+ '.jpeg';
           const storageRef=ref(storage,'car-marketplace/'+fileName);
         const metaData={
@@ -33,8 +47,13 @@ function UploadImages() {
           console.log('File uploaded:', snapshot.metadata);
           
           }).then(resp=>{
-            getDownloadURL(storageRef).then(async(downloadurl)=>{
-              console.log(downloadurl);
+            getDownloadURL(storageRef).then(async(downloadUrl)=>{
+              console.log(downloadUrl);
+              await db.insert(CarImages).values({
+                imageUrl:downloadUrl,
+                carListingId:triggerUploadImages
+            })
+
             })
           })
         })
@@ -68,7 +87,7 @@ function UploadImages() {
            onChange={onFileSelected} 
             className='opacity-0' />
       </div>
-      <Button onClick={UploadImages}>Upload Images</Button>
+   
     </div>
   )
 }
