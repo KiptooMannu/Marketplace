@@ -2,7 +2,7 @@ import React , { useState } from 'react'
 import { IoClose } from "react-icons/io5";
 import {storage} from '../../configs_Backend/Firebase_config'
 import { Button } from '@/components/ui/button';
-import {  ref, uploadBytes } from 'firebase/storage';
+import {  getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 function UploadImages() {
     const [selectedFileList,setSelectedFileList]=useState([]);
     const onFileSelected=(event)=>{
@@ -32,6 +32,10 @@ function UploadImages() {
         uploadBytes(storageRef,file,metaData).then((snapshot)=>{
           console.log('File uploaded:', snapshot.metadata);
           
+          }).then(resp=>{
+            getDownloadURL(storageRef).then(async(downloadurl)=>{
+              console.log(downloadurl);
+            })
           })
         })
         }
