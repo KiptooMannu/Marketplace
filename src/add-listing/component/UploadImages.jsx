@@ -24,13 +24,13 @@ function UploadImages() {
 
     const UploadImages=()=>{
         selectedFileList.forEach((file)=>{
-          const fileName=Date.now()+ 'jpeg';
+          const fileName=Date.now()+ '.jpeg';
           const storageRef=ref(storage,'car-marketplace/'+fileName);
         const metaData={
           ContentType:'image/jpeg'
         }
         uploadBytes(storageRef,file,metaData).then((snapshot)=>{
-          console.log('File uploaded');
+          console.log('File uploaded:', snapshot.metadata);
           
           })
         })

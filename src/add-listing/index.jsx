@@ -40,7 +40,7 @@ function Addlisting() {
   const handleFeatureChange=(name,value)=>{
     setFeaturesData((prevData)=>({
         ...prevData,
-        [name]:value
+        [name]: value || false, // default to false if unchecked
     }))
 console.log(featuresData)
 }
@@ -52,7 +52,7 @@ console.log(featuresData)
 
     try {
       const result = await db.insert(CarListing).values({
-        ...FormData,
+        ...formData,
         features: featuresData,
       });
      
@@ -111,11 +111,12 @@ console.log(featuresData)
           </div>
           <Separator className='my-6'/>
           {/* Car Images */}
-          <UploadImages/>
+     
           <div className="mt-10 flex justify-end">
             <Button onClick={(e) => onSubmit(e)}>Submit</Button>
           </div>
         </form>
+        <UploadImages/>
       </div>
     </div>
   );

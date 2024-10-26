@@ -1,22 +1,26 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getStorage} from 'firebase/storage'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp, getApps } from "firebase/app";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "tubeguruji-startups.firebaseapp.com",
-  databaseURL: "https://tubeguruji-startups-default-rtdb.firebaseio.com",
-  projectId: "tubeguruji-startups",
-  storageBucket: "tubeguruji-startups.appspot.com",
-  messagingSenderId: "706430327770",
-  appId: "1:706430327770:web:c7c405743ca6ae77ad3ee3",
-  measurementId: "G-Y0BLY9QW0S"
+  authDomain: "mannu-mannu-se.firebaseapp.com",
+  projectId: "mannu-mannu-se",
+  storageBucket: "mannu-mannu-se.appspot.com", // This should be a string, not a gs:// URL
+  messagingSenderId: "716845235232",
+  appId: "1:716845235232:web:4099bd7237b49d339c9045",
+  measurementId: "G-JJX8FMGGLS"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase only if there are no initialized apps
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApps()[0]; // Use the existing initialized app
+}
+
+
+
 export const storage=getStorage(app);
