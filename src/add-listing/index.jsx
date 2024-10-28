@@ -15,12 +15,16 @@ import UploadImages from './component/UploadImages';
 import { BiLoaderAlt } from "react-icons/bi";
 import {toast} from './../components/ui/sonner'
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment'
 function Addlisting() {
   const [formData, setFormData] = useState([]);
   const [featuresData,setFeaturesData]=useState([]);
   const [triggerUploadImages,setTriggerUploadImages]=useState(); 
   const [loader,setLoader]=useState(false);
 const navigate=useNavigate();
+const {user}=useUser();
+
+
   const handleInputChange = (name, value) => { 
     console.log('Field:', name, 'Value:', value);
     setFormData((prevData) => ({
@@ -63,6 +67,11 @@ console.log(featuresData)
       const result = await db.insert(CarListing).values({
         ...formData,
         features: featuresData,
+        createdBy:user?.primaryEmailAddress?.emailAddress,
+        userName:user?.fullName,
+        userImageUrl:user?.imageUrl,
+        postedOn:moment().format('DD/MM/yyyy')
+
       }).returning({id:CarListing.id});
 
       if (result) {
