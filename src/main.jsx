@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import Home from './Home';
-
+import { Toaster } from "@/components/ui/sonner"
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Profile from './Profile/Index';
 import SignInPage from './userbutton'; // Ensure this points to the correct component
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path:'/Profile',
+    path:'/profile',
     element:<Profile/>
   },
 
@@ -45,6 +45,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       <RouterProvider router={router} />
+    <Toaster/>
     </ClerkProvider>
   </StrictMode>,
 );

@@ -2,11 +2,9 @@
 import React, { useState, useEffect } from 'react'; // <-- Add useEffect here
 import { IoClose } from "react-icons/io5";
 import {storage} from '../../configs_Backend/Firebase_config'
-import CarImages from '../../configs_Backend/Schema'
-
-
+import {CarImages} from '../../configs_Backend/Schema'
 import {  getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-function UploadImages({triggerUploadImages}) {
+function UploadImages({triggerUploadImages,setLoader}) {
     const [selectedFileList,setSelectedFileList]=useState([]);
     
     useEffect(()=>{
@@ -37,6 +35,7 @@ function UploadImages({triggerUploadImages}) {
 
 
     const UploadImageToServer=async()=>{
+      setLoader(true);
         await selectedFileList.forEach(async(file)=>{
           const fileName=Date.now()+ '.jpeg';
           const storageRef=ref(storage,'car-marketplace/'+fileName);
@@ -57,6 +56,7 @@ function UploadImages({triggerUploadImages}) {
             })
           })
         })
+        setLoader(false);
         }
 
 

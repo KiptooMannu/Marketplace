@@ -12,13 +12,15 @@ import { CarListing } from '@/configs_Backend/Schema';
 import db from './../configs_Backend/index.js';
 import IconField from './component/IconField';
 import UploadImages from './component/UploadImages';
-
-
+import { BiLoaderAlt } from "react-icons/bi";
+import {toast} from './../components/ui/sonner'
+import { useNavigate } from 'react-router-dom';
 function Addlisting() {
   const [formData, setFormData] = useState([]);
   const [featuresData,setFeaturesData]=useState([]);
   const [triggerUploadImages,setTriggerUploadImages]=useState(); 
-
+  const [loader,setLoader]=useState(false);
+const navigate=useNavigate();
   const handleInputChange = (name, value) => { 
     console.log('Field:', name, 'Value:', value);
     setFormData((prevData) => ({
@@ -50,7 +52,11 @@ console.log(featuresData)
 
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    setLoader(true);
+        e.preventDefault();
+        console.log(formData);
+        toast('Please Wait...')
+        
     console.log("Form data on submit:", formData);
 
     try {
@@ -62,6 +68,7 @@ console.log(featuresData)
       if (result) {
         console.log("Data Saved:", result);
         setTriggerUploadImages(result[0]?.id);  // Correct usage here
+        setLoader(false);
         alert("Listing added successfully!");
       }
      
@@ -118,12 +125,17 @@ console.log(featuresData)
           </div>
           <Separator className='my-6'/>
           {/* Car Images */}
-      
+          <UploadImages triggerUploadImages={triggerUploadImages}
+          setLoader={(v)=>{setLoader(v);navigate('/profile')}}/>
           <div className="mt-10 flex justify-end">
-            <Button onClick={(e) => onSubmit(e)}>Submit</Button>
+            <Button type="button" 
+                disabled={loader}
+                onClick={(e)=>onSubmit(e)}>
+         {!loader?'Submit':<BiLoaderAlt className='animate-spin text-lg' />}
+              Submit</Button>
           </div>
         </form>
-        <UploadImages triggerUploadImages={triggerUploadImages}/>
+      
       </div>
     </div>
   );
