@@ -16,7 +16,10 @@ import { BiLoaderAlt } from "react-icons/bi";
 import {toast} from './../components/ui/sonner'
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
-import { toast } from 'sonner'
+import { useUser } from '@clerk/clerk-react'
+
+
+
 function Addlisting() {
   const [formData, setFormData] = useState([]);
   const [featuresData,setFeaturesData]=useState([]);
@@ -138,11 +141,11 @@ console.log(featuresData)
           <UploadImages triggerUploadImages={triggerUploadImages}
           setLoader={(v)=>{setLoader(v);navigate('/profile')}}/>
           <div className="mt-10 flex justify-end">
-            <Button type="button" 
-                disabled={loader}
-                onClick={(e)=>onSubmit(e)}>
-         {!loader?'Submit':<BiLoaderAlt className='animate-spin text-lg' />}
-              Submit</Button>
+          <Button type="button" 
+                    disabled={loader}
+                    onClick={(e)=>onSubmit(e)}>
+                        {!loader?'Submit':<BiLoaderAlt className='animate-spin text-lg' />}
+                        </Button>
           </div>
         </form>
       
