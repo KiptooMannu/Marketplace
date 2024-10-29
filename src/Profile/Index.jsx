@@ -4,26 +4,30 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import MyListing from './components/MyListing'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Inbox from './components/Inbox'
+
 function Profile() {
   return (
     <div>
-   <Header/>
-   <div className='px-10 md:px-20 my-10'>
+        <Header/>
+        <div className='px-10 md:px-20 my-10'>
+        <Tabs defaultValue="my-listing" className="w-full">
+        <TabsList className="w-full flex justify-start">
+          <TabsTrigger value="my-listing">My Listing</TabsTrigger>
+          <TabsTrigger value="inbox">Inbox</TabsTrigger>
+          <TabsTrigger value="profile">Profile</TabsTrigger>
 
-   <Tabs defaultValue="account" className="w-[400px]">
-  <TabsList>
-    <TabsTrigger value="My Listing">My Listing</TabsTrigger>
-    <TabsTrigger value="Inbox">Inbox</TabsTrigger>
-    <TabsTrigger value="Profile">Profile</TabsTrigger>
-  </TabsList>
-  <TabsContent value="account">Make changes to your account here.</TabsContent>
-  <TabsContent value="password">Change your password here.</TabsContent>
-</Tabs>
+        </TabsList>
+        <TabsContent value="my-listing" >
+        <MyListing/>
+        </TabsContent>
+        <TabsContent value="inbox"><Inbox/></TabsContent>
+        <TabsContent value="profile">Profile Tab</TabsContent>
 
+      </Tabs>
 
-
-<MyListing/>
-   </div>
+           
+        </div>
     </div>
   )
 }
