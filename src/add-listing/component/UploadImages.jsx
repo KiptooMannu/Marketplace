@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import {storage} from '../../configs_Backend/Firebase_config'
 import {CarImages} from '../../configs_Backend/Schema'
 import {  getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { eq } from 'drizzle-orm';
 function UploadImages({triggerUploadImages,setLoader,carInfo}) {
     const [selectedFileList,setSelectedFileList]=useState([]);
     const [EditCarImageList,setEditCarImageList]=useState([]);
@@ -51,6 +52,14 @@ function UploadImages({triggerUploadImages,setLoader,carInfo}) {
     }
 
 
+    const onImageRemoveFromDB=async(image,index)=>{
+      const result=await db.delete(CarImages).where(eq(CarImages.id,carInfo?.images[index]?.id)).returning({id:CarImages.id});
+
+      const imageList=EditCarImageList.filter(item=>item!=image);
+      setEditCarImageList(imageList);
+
+  }
+
     const UploadImageToServer=async()=>{
       setLoader(true);
         await selectedFileList.forEach(async(file)=>{
@@ -82,10 +91,21 @@ function UploadImages({triggerUploadImages,setLoader,carInfo}) {
         <h2 className='font-medium text-xl my-3'>Upload Car Images</h2>
       <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5'>
         
+      {mode=='edit'&&
+            EditCarImageList?.map((image,index)=>(
+                <div key={index}>
+                    <IoMdCloseCircle className='absolute m-2 text-lg text-white'
+                    onClick={()=>onImageRemoveFromDB(image,index)}
+                    />
+                    <img src={image} className='w-full h-[130px] object-cover rounded-xl'/>
+                </div>
+            ))
+            }
+
         {selectedFileList.map((image,index)=>(
             <div key={index}>
 <IoClose className='absolute m-2 text-lg text-white'
-    onClick={()=>onImageRemove(image,index)}
+    onClick={()=>onImageRemoveFromDB(image,index)}
 />
 
                 <img src={URL.createObjectURL(image)} className='w-full height-[130px] object-cover rounded-xl'
