@@ -14,7 +14,7 @@ import IconField from './component/IconField';
 import UploadImages from './component/UploadImages';
 import { BiLoaderAlt } from "react-icons/bi";
 import {toast} from './../components/ui/sonner'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import moment from 'moment'
 import { useUser } from '@clerk/clerk-react'
 
@@ -25,9 +25,29 @@ function Addlisting() {
   const [featuresData,setFeaturesData]=useState([]);
   const [triggerUploadImages,setTriggerUploadImages]=useState(); 
   const [loader,setLoader]=useState(false);
-const navigate=useNavigate();
-const {user}=useUser();
+   const navigate=useNavigate();
+   const {user}=useUser();
+   const [searchParams]=useSearchParams();
 
+
+
+   const mode = searchParams.get('mode');
+   const recordId=searchParams.get('id');
+
+
+   useEffect(()=>{
+    if(mode=='edit')
+      {
+          GetListingDetail();
+      }
+  },[]);
+
+  
+   const GetListingDetail=async()=>{
+    const result=await db.select().from(features)
+    const resp=Service.FormatResult(result)
+    setFeaturesData(resp)
+   }
 
   const handleInputChange = (name, value) => { 
     console.log('Field:', name, 'Value:', value);
@@ -64,32 +84,47 @@ console.log(featuresData)
         e.preventDefault();
         console.log(formData);
         toast('Please Wait...')
-        
-    console.log("Form data on submit:", formData);
-
-    try {
-      const result = await db.insert(CarListing).values({
-        ...formData,
-        features: featuresData,
-        createdBy:user?.primaryEmailAddress?.emailAddress,
-        userName:user?.fullName,
-        userImageUrl:user?.imageUrl,
-        postedOn:moment().format('DD/MM/yyyy')
-
-      }).returning({id:CarListing.id});
-
-      if (result) {
-        console.log("Data Saved:", result);
-        setTriggerUploadImages(result[0]?.id);  // Correct usage here
-        setLoader(false);
-        alert("Listing added successfully!");
+        if(mode=='edit')
+          {
+              const result = await db.update(CarListing).set({
+                  ...formData,
+                  features:featuresData,
+                  createdBy:user?.primaryEmailAddress?.emailAddress,
+                  userName:user?.fullName,
+                  userImageUrl:user?.imageUrl,
+                  postedOn:moment().format('DD/MM/yyyy')
+              }).where(eq(CarListing.id,recordId)).returning({id:CarListing.id}) ;
+              console.log(result);
+              navigate('/profile')
+              setLoader(false);
+          }
+          else{
+              try{
+                  const result=await db.insert(CarListing).values({
+                      ...formData,
+                      features:featuresData,
+                      createdBy:user?.primaryEmailAddress?.emailAddress,
+                      userName:user?.fullName,
+                      userImageUrl:user?.imageUrl,
+                      postedOn:moment().format('DD/MM/yyyy')
+                  },
+              ).returning({id:CarListing.id});
+                  if(result)
+                  {
+                      console.log("Data Saved")
+                      setTriggerUploadImages(result[0]?.id);
+                      setLoader(false);
+                  }
+              }catch(e){
+                  setLoader(false);
+                  toast('Please fill all required fields')
+                  console.log("Error",e)
+              }
       }
+          
+      }
+  
      
-    } catch (error) {
-      console.error("Error during submission:", error.message || error); 
-      alert(`An error occurred: ${error.message || "Unknown error"}`);
-    }
-  };
 
 
 
@@ -112,11 +147,11 @@ console.log(featuresData)
                     {item.required && <span className="text-red-800">*</span>}
                   </label>
                   {item.fieldType === 'text' || item.fieldType === 'number' ? (
-                    <InputField item={item} handleInputChange={handleInputChange} />
+                    <InputField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                   ) : item.fieldType === 'dropdown' ? (
-                    <Dropdownfield item={item} handleInputChange={handleInputChange} />
+                    <Dropdownfield item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                   ) : item.fieldType === 'textarea' ? (
-                    <TextAreaField item={item} handleInputChange={handleInputChange} />
+                    <TextAreaField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                   ) : null}
                 </div>
               ))}
@@ -139,6 +174,8 @@ console.log(featuresData)
           <Separator className='my-6'/>
           {/* Car Images */}
           <UploadImages triggerUploadImages={triggerUploadImages}
+          carInfo={carInfo}
+          mode={mode}
           setLoader={(v)=>{setLoader(v);navigate('/profile')}}/>
           <div className="mt-10 flex justify-end">
           <Button type="button" 

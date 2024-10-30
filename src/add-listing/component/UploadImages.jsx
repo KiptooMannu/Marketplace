@@ -4,9 +4,26 @@ import { IoClose } from "react-icons/io5";
 import {storage} from '../../configs_Backend/Firebase_config'
 import {CarImages} from '../../configs_Backend/Schema'
 import {  getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-function UploadImages({triggerUploadImages,setLoader}) {
+function UploadImages({triggerUploadImages,setLoader,carInfo}) {
     const [selectedFileList,setSelectedFileList]=useState([]);
-    
+    const [EditCarImageList,setEditCarImageList]=useState([]);
+
+    useEffect(()=>{
+        if(mode=='edit')
+        {
+            setEditCarImageList([]);
+            carInfo?.images.forEach((image)=>{
+                setEditCarImageList(prev=>[...prev,image?.imageUrl]);
+                
+            })
+        }
+    },[carInfo])
+
+
+
+   
+   
+   
     useEffect(()=>{
       if(triggerUploadImages)
 

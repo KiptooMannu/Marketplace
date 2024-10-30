@@ -5,7 +5,8 @@ function TextAreaField({item ,handleInputChange}) {
   return (
     <div>
       <Textarea onChange={(e)=>handleInputChange(item.name,e.target.value)}
-          required={item.required}/>
+          required={item.required}
+          defaultValue={carInfo?.[item?.name]}/>
     </div>
   )
 }
