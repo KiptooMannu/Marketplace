@@ -29,7 +29,12 @@ const router = createBrowserRouter([
   {
     path:'/add-listing',
     element:<Addlisting/>
-  }
+  },
+
+{
+  path:'/search/:category',
+  element:<SearchByCategory/>
+}
 
 ]);
 
