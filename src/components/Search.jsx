@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -11,28 +11,29 @@ import { CiSearch } from "react-icons/ci";
 import Data from '@/Shared/Data';
 
 function Search() {
+  const[cars,setCars]=useState();
+  const[make,setMake]=useState();
+  const[price,setPrice]=useState();
+
   return (
     <div className='p-2 md:p-5 bg-white rounded-md md:rounded-full flex-col md:flex md:flex-row gap-10 px-5 items-center w-[60%]'>
       
       {/* Car Selection */}
-      <Select>
-        <SelectTrigger className="outline-none md:border-none w-full shadow-none">
-          <SelectValue placeholder="Cars" />
+      <Select onValueChange={(value)=>setCars(value)}>
+        <SelectTrigger  className="outline-none md:border-none w-full shadow-none text-lg">
+            <SelectValue placeholder="Cars" />
         </SelectTrigger>
         <SelectContent>
-          {/* Assuming you will map categories for car types */}
-          {Data.Category.map((category) => (
-            <SelectItem key={category.id} value={category.name}>
-              {category.name}
-            </SelectItem>
-          ))}
+            <SelectItem value="New">New</SelectItem>
+            <SelectItem value="Used">Used</SelectItem>
+            <SelectItem value="Certified Pre-Owned">Certified Pre-Owned</SelectItem>
         </SelectContent>
-      </Select>
+        </Select>
 
       <Separator orientation="vertical" className="hidden md:block" />
 
       {/* Car Makes Selection */}
-      <Select>
+      <Select onValueChange={(value)=>setMake(value)}>
         <SelectTrigger className="outline-none md:border-none w-full shadow-none">
           <SelectValue placeholder="Car Makes" />
         </SelectTrigger>
@@ -48,7 +49,7 @@ function Search() {
       <Separator orientation="vertical" className="hidden md:block" />
 
       {/* Pricing Selection */}
-      <Select>
+      <Select onValueChange={(value)=>setPrice(value)}>
         <SelectTrigger className="outline-none md:border-none w-full shadow-none">
           <SelectValue placeholder="Pricing" />
         </SelectTrigger>
@@ -65,9 +66,10 @@ function Search() {
       </Select>
 
       {/* Search Icon */}
-      <div>
-        <CiSearch className='text-[50px] bg-primary rounded-full p-3 text-white hover:scale-105 transition-all cursor-pointer' />
-      </div>
+      <Link to={'/search?cars='+cars+"&make="+make+"&price="+price}>
+        <CiSearch  className='text-[50px] bg-primary 
+        rounded-full p-3 text-white hover:scale-105 transition-all cursor-pointer'/>
+        </Link>
 
     </div>
   );

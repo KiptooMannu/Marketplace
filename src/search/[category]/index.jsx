@@ -1,37 +1,31 @@
-import Service from '@/Shared/Service';
-import { db } from './../configs_Backend/index';
-import { CarImages, CarListing } from './../configs_Backend/Schema';
+import Header from '@/components/Header'
+import Search from '@/components/Search'
+import { db } from './../../configs_Backend/index';
+import { CarImages, CarListing } from './../../configs_Backend/Schema';
 import { eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import Header from '@/components/Header';
-import Search from '@/components/Search';
+import { useParams } from 'react-router-dom'
+import Service from '@/Shared/Service';
 import CarItem from '@/components/CarItem';
 
-function SearchByOptions() {
-    const [searchParam]=useSearchParams();
-    const [carList,setCarList]=useState([]);
-    const condition=searchParam.get('cars');
-    const make=searchParam.get('make');
-    const price=searchParam.get('price');
+function SearchByCategory() {
 
-    
+    const {category}=useParams();
+    const [carList,setCarList]=useState([]);
 
     useEffect(()=>{
         GetCarList();
     },[])
+
     const GetCarList=async()=>{
         const result=await db.select().from(CarListing)
         .innerJoin(CarImages,eq(CarListing.id,CarImages.carListingId))
-        .where(condition!=undefined&&eq(CarListing.condition,condition))
-        .where(make!=undefined&&eq(CarListing.make,make))
+        .where(eq(CarListing.category,category))
 
         const resp=Service.FormatResult(result);
-        console.log(resp);
         setCarList(resp);
     }
-
-
+     
   return (
     <div>
         <Header/>
@@ -40,7 +34,7 @@ function SearchByOptions() {
             <Search/>
         </div>
         <div className='p-10 md:px-20'>
-            <h2 className='font-bold text-4xl '>Search Result</h2>
+            <h2 className='font-bold text-4xl '>{category}</h2>
 
             {/* List of CarList  */}
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7'>
@@ -60,4 +54,4 @@ function SearchByOptions() {
   )
 }
 
-export default SearchByOptions
+export default SearchByCategory

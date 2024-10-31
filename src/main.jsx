@@ -8,6 +8,7 @@ import SignInPage from './userbutton'; // Ensure this points to the correct comp
 import Addlisting from './add-listing/index';
 import { ClerkProvider } from '@clerk/clerk-react';
 import './index.css'; 
+import SearchByOptions from './search';
 
 // Define your routes
 const router = createBrowserRouter([
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
 {
   path:'/search/:category',
   element:<SearchByCategory/>
+},
+
+{
+  path:'/search',
+  element:<SearchByOptions/>
 }
 
 ]);
