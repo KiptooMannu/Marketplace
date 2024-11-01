@@ -9,6 +9,7 @@ import Addlisting from './add-listing/index';
 import { ClerkProvider } from '@clerk/clerk-react';
 import './index.css'; 
 import SearchByOptions from './search';
+import ListingDetail from './listing-details';
 
 // Define your routes
 const router = createBrowserRouter([
@@ -40,7 +41,13 @@ const router = createBrowserRouter([
 {
   path:'/search',
   element:<SearchByOptions/>
+},
+
+{
+  path:'/listing-details/:id',
+  element:<ListingDetail/>
 }
+
 
 ]);
 

@@ -6,6 +6,7 @@ import { GiGearStickPattern } from "react-icons/gi";
 import { MdOpenInNew } from "react-icons/md";
 import { Link, useParams } from 'react-router-dom';
 function CarItem({car}) {
+   
   
   return (
     <Link to={'/listing-details/'+car?.id}>
