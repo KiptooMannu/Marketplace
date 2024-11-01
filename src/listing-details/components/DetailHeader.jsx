@@ -11,17 +11,17 @@ function DetailHeader({carDetail}) {
         <p className='text-sm'>{carDetail?.tagline}</p>
    
    <div className='flex gap-2 mt-3'>
-   <div className='flex gap-2 items-center p-1 px-3 bg-blue-50 rounded-full'>
+   <div className='flex gap-2 items-center p-2 px-3 bg-blue-50 rounded-full'>
    <FaCalendarAlt className='h-5 w-5 text-primary' />
    <h2 className='text-primary text-sm'>{carDetail?.year}</h2>
    </div>
 
-   <div className='flex gap-2 items-center p-1 px-3 bg-blue-50 rounded-full'>
+   <div className='flex gap-2 items-center p-2 px-3 bg-blue-50 rounded-full'>
    <IoIosSpeedometer  className='h-5 w-5 text-primary' />
    <h2 className='text-primary text-sm'>{carDetail?.mileage}</h2>
    </div>
 
-   <div className='flex gap-2 items-center p-1 px-3 bg-blue-50 rounded-full'>
+   <div className='flex gap-2 items-center p-2 px-3 bg-blue-50 rounded-full'>
    <GiGearStickPattern  className='h-5 w-5 text-primary' />
    <h2 className='text-primary text-sm'>{carDetail?.transmission}</h2>
    </div>
