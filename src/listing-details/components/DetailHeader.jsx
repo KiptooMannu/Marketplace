@@ -6,7 +6,7 @@ import { TbGasStation } from "react-icons/tb";
 function DetailHeader({carDetail}) {
   return (
     <div>
-        {carDetail?.listingTitle}
+        {carDetail ?.listingTitle?
         <div>
 
       <h2 className='font-bold text-3xl'>
@@ -35,11 +35,10 @@ function DetailHeader({carDetail}) {
    <h2 className='text-primary text-sm'>{carDetail?.transmission}</h2>
    </div>
    </div>
-   
    </div>:
    <div className='w-full rounded-xl h-[100px] bg-slate-200 animate-pulse'>
 
-   </div>
+   </div>}
 
     </div>
   )
