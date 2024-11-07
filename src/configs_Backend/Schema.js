@@ -25,8 +25,8 @@ export const CarListing=pgTable('carLisiting',{
     listingDescription:varchar('listingDescription').notNull(),
     features:json('features'),
     createdBy:varchar('createdBy').notNull(),
-    userName:varchar('userName').notNull().default('Tubeguruji'),
-    userImageUrl:varchar('userImageUrl').default('https://www.tubeguruji.com/_next/image?url=%2Flogo2.jpg&w=128&q=75'),
+    userName:varchar('userName').notNull().default('Immanuel'),
+    userImageUrl:varchar('userImageUrl').default('https://www.google.com/imgres?q=person&imgurl=https%3A%2F%2Fimages.inc.com%2Fuploaded_files%2Fimage%2F1024x576%2Fgetty_481292845_77896.jpg&imgrefurl=https%3A%2F%2Fwww.inc.com%2Ferik-sherman%2F12-ways-to-become-that-popular-person-at-work.html&docid=2CzlkmOllhjJAM&tbnid=fugl9ywd8lqEWM&vet=12ahUKEwiHnZ_MoMeJAxW1ygIHHccQBeUQM3oECBYQAA..i&w=1024&h=576&hcb=2&ved=2ahUKEwiHnZ_MoMeJAxW1ygIHHccQBeUQM3oECBYQAA'),
     postedOn:varchar('postedOn')
 })
 export const CarImages=pgTable('carImages',{
