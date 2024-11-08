@@ -28,6 +28,7 @@ function Addlisting() {
    const navigate=useNavigate();
    const {user}=useUser();
    const [searchParams]=useSearchParams();
+   const [carInfo,setCarInfo]=useState();
 
 
 

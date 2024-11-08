@@ -10,6 +10,7 @@ import { ClerkProvider } from '@clerk/clerk-react';
 import './index.css'; 
 import SearchByOptions from './search';
 import ListingDetail from './listing-details/[id]/index';
+import SearchByCategory from './search/[category]';
 
 // Define your routes
 const router = createBrowserRouter([

@@ -5,7 +5,7 @@ import {storage} from '../../configs_Backend/Firebase_config'
 import {CarImages} from '../../configs_Backend/Schema'
 import {  getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { eq } from 'drizzle-orm';
-function UploadImages({triggerUploadImages,setLoader,carInfo}) {
+function UploadImages({triggerUploadImages,setLoader,carInfo,mode}) {
     const [selectedFileList,setSelectedFileList]=useState([]);
     const [EditCarImageList,setEditCarImageList]=useState([]);
 
