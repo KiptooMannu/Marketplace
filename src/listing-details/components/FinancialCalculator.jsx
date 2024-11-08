@@ -1,4 +1,4 @@
-import InputField from '@/add-listing/components/InputField'
+import InputField from '../../add-listing/component/InputField'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import React, { useState } from 'react'

@@ -1,5 +1,5 @@
 import CarSpecification from '@/Shared/CarSpecification'
-import IconField from '@/add-listing/components/IconField'
+import IconField from '../../add-listing/component/IconField'
 import React from 'react'
 
 function Specification({carDetail}) {

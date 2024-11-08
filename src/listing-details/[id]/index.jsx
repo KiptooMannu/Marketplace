@@ -10,7 +10,7 @@ import Footer from '@/components/Footer';
 import Pricing from '../components/Pricing';
 import Specification from '../components/Specification';
 import OwnersDetail from '../components/OwnersDetail';
-import FinanacialCalculator from '../components/FinanacialCalculator';
+import FinanacialCalculator from '../components/FinancialCalculator';
 
 import db from '@/configs_Backend';
 import { CarImages, CarListing } from '@/configs_Backend/Schema';

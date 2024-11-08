@@ -8,10 +8,11 @@ import {
     CarouselNext,
     CarouselPrevious,
   } from "@/components/ui/carousel"
-  import {db} from './../configs_Backend/Schema'
+ 
   import {desc ,eq} from 'drizzle-orm'
   import { CarImages, CarListing } from './../configs_Backend/Schema';
 import Service from '@/Shared/Service';
+import db from '@/configs_Backend';
 
 function MostSearchedCars() {
   const [carList,setCarList]=useState([]);
