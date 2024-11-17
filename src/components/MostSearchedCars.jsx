@@ -10,9 +10,11 @@ import {
   } from "@/components/ui/carousel"
  
   import {desc ,eq} from 'drizzle-orm'
-  import { CarImages, CarListing } from './../configs_Backend/Schema';
+  import { CarImages, CarListing } from '../configs_Backend/Schema';
 import Service from '@/Shared/Service';
-import db from '@/configs_Backend';
+import db from '../configs_Backend/index';
+
+
 
 function MostSearchedCars() {
   const [carList,setCarList]=useState([]);

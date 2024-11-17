@@ -1,10 +1,14 @@
 import { Button } from '@/components/ui/button'
-import db from '@/configs_Backend';
-import { CarImages, CarListing } from '@/configs_Backend/Schema';
+
+
 import { useUser } from '@clerk/clerk-react';
 import { desc, eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import db from '@/configs_Backend';
+import { CarImages, CarListing } from '@/configs_Backend/Schema';
+
 
 function MyListing() {
 
@@ -16,8 +20,8 @@ function MyListing() {
   },[user])
   const GetUserCarListing=async()=>{
       const result=await db.select().from(CarListing)
-      .leftJoin(CarImages,eq(CarListing.id,CarImages.carListingId))
-      .where(eq(CarListing.createdBy,user?.primaryEmailAddress?.emailAddress))
+      .leftJoin(CarImages,eq(CarListing.id,CarImages .carListingId))
+      .where(eq(    CarListing.createdBy,user?.primaryEmailAddress?.emailAddress))
       .orderBy(desc(CarListing.id))
      
       const resp=Service.FormatResult(result)

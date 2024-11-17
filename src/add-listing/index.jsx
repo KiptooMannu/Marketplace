@@ -8,8 +8,8 @@ import TextAreaField from './component/TextAreaField';
 import { Content, Separator } from '@radix-ui/react-select';
 import features from './../Shared/Features.json';
 import { Button } from '@/components/ui/button';
-import { CarListing } from '@/configs_Backend/Schema';
-import db from './../configs_Backend/index.js';
+
+import db from '../configs_Backend/index.js';
 import IconField from './component/IconField';
 import UploadImages from './component/UploadImages';
 import { BiLoaderAlt } from "react-icons/bi";
@@ -17,6 +17,7 @@ import {toast} from './../components/ui/sonner'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import moment from 'moment'
 import { useUser } from '@clerk/clerk-react'
+import { CarListing } from '@/configs_Backend/Schema';
 
 
 

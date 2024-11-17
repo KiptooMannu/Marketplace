@@ -1,7 +1,7 @@
 import Header from '@/components/Header'
 import Search from '@/components/Search'
 
-import { CarImages, CarListing } from './../../configs_Backend/Schema';
+import { CarImages, CarListing } from '../../configs_Backend/Schema';
 import { eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
