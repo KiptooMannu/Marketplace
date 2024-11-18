@@ -2,12 +2,14 @@ import { Button } from '@/components/ui/button'
 
 
 import { useUser } from '@clerk/clerk-react';
+import db from '../../../Configs';  
+import { CarImages, CarListing } from '../../../Configs/Schema';
 import { desc, eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import db from '@/configs_Backend';
-import { CarImages, CarListing } from '@/configs_Backend/Schema';
+
+
 
 
 function MyListing() {

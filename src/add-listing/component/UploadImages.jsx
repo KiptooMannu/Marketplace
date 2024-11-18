@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react'; // <-- Add useEffect here
 import { IoClose } from "react-icons/io5";
-import {storage} from '../../configs_Backend/Firebase_config'
-import {CarImages} from '../../configs_Backend/Schema'
+import {storage} from '../../../Configs/Firebase_config'
+import {CarImages} from '../../../Configs/Schema'
 import {  getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { eq } from 'drizzle-orm';
 function UploadImages({triggerUploadImages,setLoader,carInfo,mode}) {

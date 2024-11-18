@@ -1,13 +1,13 @@
 import Header from '@/components/Header'
 import Search from '@/components/Search'
 
-import { CarImages, CarListing } from '../../configs_Backend/Schema';
+import { CarImages, CarListing } from '../../../Configs/Schema';
 import { eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Service from '@/Shared/Service';
 import CarItem from '@/components/CarItem';
-import db from '@/configs_Backend';
+import db from '../../../Configs/index';
 
 function SearchByCategory() {
 

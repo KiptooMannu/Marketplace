@@ -1,13 +1,14 @@
 import Service from '@/Shared/Service';
 
-import { CarImages, CarListing } from './../configs_Backend/Schema';
+import { CarImages, CarListing } from './../../Configs/Schema';
 import { eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Header from '@/components/Header';
 import Search from '@/components/Search';
 import CarItem from '@/components/CarItem';
-import db from '@/configs_Backend';
+import db from '../../Configs/index';
+
 
 function SearchByOptions() {
     const [searchParam]=useSearchParams();

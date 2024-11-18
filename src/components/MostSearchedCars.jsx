@@ -10,9 +10,11 @@ import {
   } from "@/components/ui/carousel"
  
   import {desc ,eq} from 'drizzle-orm'
-  import { CarImages, CarListing } from '../configs_Backend/Schema';
+
 import Service from '@/Shared/Service';
-import db from '../configs_Backend/index';
+import { CarImages, CarListing } from '../../Configs/Schema';
+import db from '../../Configs/index';
+
 
 
 
@@ -30,6 +32,8 @@ useEffect(()=>{
 
       const resp =Service.FormatResult(result);
       console.log(resp)
+
+      
       setCarList(resp);
      
   }

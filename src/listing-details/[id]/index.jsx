@@ -12,8 +12,8 @@ import Specification from '../components/Specification';
 import OwnersDetail from '../components/OwnersDetail';
 import FinanacialCalculator from '../components/FinancialCalculator';
 
-import db from '@/configs_Backend';
-import { CarImages, CarListing } from '@/configs_Backend/Schema';
+import db from '../../../Configs';
+import { CarImages, CarListing } from '../../../Configs/Schema';
 import Service from '@/Shared/Service';
 import MostSearchedCars from '@/components/MostSearchedCars';
 
