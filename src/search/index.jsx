@@ -7,7 +7,8 @@ import { useSearchParams } from 'react-router-dom'
 import Header from '@/components/Header';
 import Search from '@/components/Search';
 import CarItem from '@/components/CarItem';
-import db from '../../Configs/index';
+import { db } from '../../Configs';
+
 
 
 function SearchByOptions() {

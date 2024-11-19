@@ -9,7 +9,7 @@ import { Content, Separator } from '@radix-ui/react-select';
 import features from './../Shared/Features.json';
 import { Button } from '@/components/ui/button';
 
-import db from '../../Configs';
+import { db } from '../../Configs';
 import IconField from './component/IconField';
 import UploadImages from './component/UploadImages';
 import { BiLoaderAlt } from "react-icons/bi";
