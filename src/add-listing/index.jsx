@@ -3,13 +3,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Header from '@/components/Header';
 import carDetails from './../Shared/carDetails.json';
 import InputField from './component/InputField';
-import Dropdownfield from './component/Dropdownfield';
+import DropdownField from './component/Dropdownfield';
 import TextAreaField from './component/TextAreaField';
 import { Content, Separator } from '@radix-ui/react-select';
 import features from './../Shared/Features.json';
 import { Button } from '@/components/ui/button';
 
-import { db } from '../../Configs';
+import {db} from '../../Configs'
 import IconField from './component/IconField';
 import UploadImages from './component/UploadImages';
 import { BiLoaderAlt } from "react-icons/bi";
@@ -151,7 +151,7 @@ console.log(featuresData)
                   {item.fieldType === 'text' || item.fieldType === 'number' ? (
                     <InputField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                   ) : item.fieldType === 'dropdown' ? (
-                    <Dropdownfield item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
+                    <DropdownField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                   ) : item.fieldType === 'textarea' ? (
                     <TextAreaField item={item} handleInputChange={handleInputChange} carInfo={carInfo} />
                   ) : null}
